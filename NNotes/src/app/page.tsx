@@ -19,7 +19,7 @@ export default function Home() {
     getAllNotes();
   }, [])
 
-  const miVariable = process.env.MI_VARIABLE_DE_ENTORNO;
+  const miVariable = process.env.NEXT_PUBLIC_MI_VARIABLE_DE_ENTORNO;
   console.log("🚀 ~ Home ~ miVariable:", miVariable)
 
   return (
