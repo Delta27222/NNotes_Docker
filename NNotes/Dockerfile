@@ -4,6 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
+ENV NEXT_PUBLIC_MI_VARIABLE_DE_ENTORNO=esta_es_la_prueba
 RUN npm run build
 
 FROM node:18-alpine AS runtime
@@ -13,7 +14,6 @@ COPY package*.json ./
 RUN npm ci --only=production
 COPY --from=build /app/.next ./.next
 COPY --from=build /app/public ./public
-ENV NEXT_PUBLIC_MI_VARIABLE_DE_ENTORNO=esta_es_la_prueba
 
 EXPOSE 3000
 USER node
