@@ -19,9 +19,6 @@ export default function Home() {
     getAllNotes();
   }, [])
 
-  const miVariable = process.env.NEXT_PUBLIC_MI_VARIABLE_DE_ENTORNO;
-  console.log("🚀 ~ Home ~ miVariable:", miVariable)
-
   return (
     <main className="flex min-h-screen flex-col py-14 px-32">
       <LogoSectionComponent />

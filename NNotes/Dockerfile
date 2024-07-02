@@ -4,7 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-ENV NEXT_PUBLIC_MI_VARIABLE_DE_ENTORNO=esta_es_la_prueba
+ENV NEXT_PUBLIC_BASE_URL=URL_BACKEND
 RUN npm run build
 
 FROM node:18-alpine AS runtime
