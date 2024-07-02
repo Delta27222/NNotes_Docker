@@ -13,6 +13,7 @@ COPY package*.json ./
 RUN npm ci --only=production
 COPY --from=build /app/.next ./.next
 COPY --from=build /app/public ./public
+ENV prueba=esta_es_la_prueba
 
 EXPOSE 3000
 USER node
