@@ -8,10 +8,10 @@ on:
     types:
       - completed
 
-
 jobs:
   on-success:
     runs-on: ubuntu-latest
+    # Creo que el if no es necesario, ya que si el test del workflow anterior falla, este no se ejecuta
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout code
@@ -26,10 +26,11 @@ jobs:
           newgrp $GROUP
           mkdir ~/.kube
           sudo chown -f -R $USER ~/.kube
-          microk8s status
+          sudo microk8s status
+      # el usuario no agarra el nuevo grupo, asi que le ponemos sudo a todo que fino
       - name: Create alias
         run: |
           alias kubectl="microk8s.kubectl"
-          kubectl version 
+          sudo kubectl version
 
         # ------ la parte de microk8s ------
