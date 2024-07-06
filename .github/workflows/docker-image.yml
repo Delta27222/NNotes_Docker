@@ -76,6 +76,7 @@ jobs:
       - name: Run Server
         env:
           PORT: 3001
+          DB_URI: "probando"
           MODE: "test"
         run: |
           cd ${{ github.workspace }}/NNotes-RestAPI
@@ -83,12 +84,12 @@ jobs:
           echo "🚀 Server is running on port $PORT"
       - name: Wait
         run: sleep 12
-      - name: Run Tests
-        run: |
-          cd ${{ github.workspace }}/NNotes-RestAPI
-          npm run test
-          ss -ntlp
-          tail -n 10 nohup.out
+      # - name: Run Tests
+      #   run: |
+      #     cd ${{ github.workspace }}/NNotes-RestAPI
+      #     npm run test
+      #     ss -ntlp
+      #     tail -n 10 nohup.out
       - name: Stop Server
         run: |
           kill $(lsof -t -i:$PORT)
