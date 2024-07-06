@@ -91,6 +91,7 @@ jobs:
       #     ss -ntlp
       #     tail -n 10 nohup.out
       - name: Stop Server
+        # Deberia ser sudo fuser -k $PORT/tcp
         run: |
-          sudo fuser -k $PORT/tcp
+          sudo fuser -k 3001/tcp
           echo "🛑 Server has been stopped."
