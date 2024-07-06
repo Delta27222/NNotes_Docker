@@ -1,0 +1,35 @@
+name: Integration Test CI
+run-name: Integration Test CI - Microk8s
+
+# Solo se ejecuta desde el workflow de Docker Image CI
+on:
+  workflow_run:
+    workflows: ["Docker Image CI"]
+    types:
+      - completed
+
+
+jobs:
+  on-success:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install microk8s
+        run: |
+          sudo snap install microk8s --channel 1.29-strict/stable
+      - name: Change permissions
+        run: |
+          GROUP=snap_microk8s # microk8s for non-strict
+          sudo usermod -a -G $GROUP $USER
+          newgrp $GROUP
+          mkdir ~/.kube
+          sudo chown -f -R $USER ~/.kube
+          microk8s status
+      - name: Create alias
+        run: |
+          alias kubectl="microk8s.kubectl"
+          kubectl version 
+
+        # ------ la parte de microk8s ------
