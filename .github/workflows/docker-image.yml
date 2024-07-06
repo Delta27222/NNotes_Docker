@@ -38,8 +38,8 @@ jobs:
       env:
         NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
-        docker build -t delta27222/nnotes_frontend:$NEW_VERSION ./NNotes/
-        docker build -t delta27222/nnotes_frontend:latest ./NNotes/
+        docker build --platform=linux/amd64 -t delta27222/nnotes_frontend:$NEW_VERSION ./NNotes/
+        docker build --platform=linux/amd64 -t delta27222/nnotes_frontend:latest ./NNotes/
 
     - name: Push Docker Image
       env:
