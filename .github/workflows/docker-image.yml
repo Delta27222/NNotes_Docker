@@ -32,7 +32,7 @@ jobs:
           echo "🎉 Node has been installed."
       - name: Install Dependencies
         run: |
-          cd ${{ github.workspace }}/NNOTES
+          cd ${{ github.workspace }}/NNotes
           npm install
           echo "🎉 Frontend app dependencies have been installed"
       - name: Run Server
@@ -41,7 +41,7 @@ jobs:
           DB_URI: "probando"
           MODE: "test"
         run: |
-          cd ${{ github.workspace }}/NNOTES
+          cd ${{ github.workspace }}/NNotes
           nohup npx ts-node src/app.ts &
           echo "🚀 Server is running on port $PORT"
       - name: Wait
