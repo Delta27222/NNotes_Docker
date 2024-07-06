@@ -92,5 +92,5 @@ jobs:
       #     tail -n 10 nohup.out
       - name: Stop Server
         run: |
-          kill $(lsof -t -i:$PORT)
+          sudo fuser -k $PORT/tcp
           echo "🛑 Server has been stopped."
