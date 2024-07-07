@@ -46,8 +46,12 @@ jobs:
           echo "🚀 Server is running on port $PORT"
       - name: Wait
         run: sleep 12
-
-      # Hasta aqui llega el test del frontend
+      - name: Run Frontend Tests
+        run: |
+          cd ${{ github.workspace }}/NNotes
+          npm run test
+          ss -ntlp
+          tail -n 10 nohup.out
       - name: Git Semantic Version
         uses: PaulHatch/semantic-version@v4.0.3
         with:
@@ -55,21 +59,18 @@ jobs:
           minor_pattern: "feat:"
           format: "${major}.${minor}.${increment}"
         id: version
-
       - name: Docker Login
         env:
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-
       - name: Build Docker Image
         env:
           NEW_VERSION: ${{ steps.version.outputs.version }}
         run: |
           docker build -t delta27222/nnotes_frontend:$NEW_VERSION ./NNotes/
           docker build -t delta27222/nnotes_frontend:latest ./NNotes/
-      
       - name: Push Docker Image
         env:
           NEW_VERSION: ${{ steps.version.outputs.version }}
