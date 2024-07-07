@@ -49,7 +49,7 @@
 #       - name: Run Frontend Tests
 #         run: |
 #           cd ${{ github.workspace }}/NNotes
-#           npm run test
+#           npm run test SearchBarComponente.test.js
 #       - name: Git Semantic Version
 #         uses: PaulHatch/semantic-version@v4.0.3
 #         with:
