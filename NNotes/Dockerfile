@@ -4,7 +4,6 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-ENV NEXT_PUBLIC_BASE_URL=URL_BACKEND
 RUN npm run build
 
 FROM node:18-alpine AS runtime
