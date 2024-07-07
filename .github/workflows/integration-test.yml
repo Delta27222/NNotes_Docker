@@ -20,15 +20,16 @@ jobs:
         run: |
           sudo snap install microk8s --channel 1.29-strict/stable
       - name: Wait
-        run: sleep 8
-      - name: Change permissions
-        run: |
-          GROUP=snap_microk8s # microk8s for non-strict
-          sudo usermod -a -G $GROUP $USER
-          newgrp $GROUP
-          mkdir ~/.kube
-          sudo chown -f -R $USER ~/.kube
-          sudo microk8s status
+        run: sleep 15
+      # el usuario no agarra el nuevo grupo, asi que le ponemos sudo a todo que fino
+      # - name: Change permissions
+      #   run: |
+      #     GROUP=snap_microk8s # microk8s for non-strict
+      #     sudo usermod -a -G $GROUP $USER
+      #     newgrp $GROUP
+      #     mkdir ~/.kube
+      #     sudo chown -f -R $USER ~/.kube
+      #     sudo microk8s status
       - name: enable hostpath storage
         run: |
           sudo microk8s enable hostpath-storage
@@ -36,7 +37,6 @@ jobs:
         run: |
           sudo sysctl -w fs.inotify.max_user_instances=1280 | sudo tee /etc/sysctl.d/microk8s.conf
           sudo sysctl -w fs.inotify.max_user_watches=655360 | sudo tee -a /etc/sysctl.d/microk8s.conf
-      # el usuario no agarra el nuevo grupo, asi que le ponemos sudo a todo que fino
       - name: Create alias
         run: |
           alias kubectl="microk8s.kubectl"
