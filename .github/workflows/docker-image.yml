@@ -50,8 +50,6 @@ jobs:
         run: |
           cd ${{ github.workspace }}/NNotes
           npm run test
-          ss -ntlp
-          tail -n 10 nohup.out
       - name: Git Semantic Version
         uses: PaulHatch/semantic-version@v4.0.3
         with:
