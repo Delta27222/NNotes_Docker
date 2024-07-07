@@ -39,11 +39,12 @@ jobs:
           sudo sysctl -w fs.inotify.max_user_instances=1280 | sudo tee /etc/sysctl.d/microk8s.conf
           sudo sysctl -w fs.inotify.max_user_watches=655360 | sudo tee -a /etc/sysctl.d/microk8s.conf
       - name: Wait
-        run: sleep 12
-      - name: Create alias
-        run: |
-          alias kubectl="microk8s.kubectl"
+        run: sleep 8
       - name: Check kubectl version
         run: |
           sudo microk8s.kubectl version
+      - name: Pull docker images from Docker Hub
+        run: |
+          sudo microk8s.kubectl create deployment nnotes-frontend --image=delta27222/nnotes_frontend:latest
+
         # ------ la parte de microk8s ------
