@@ -21,7 +21,7 @@ describe("notes", ()=>{
         describe("given the note does not exist", ()=>{
             it("should return a 404", async ()=>{
                 const noteId = '663cb22f4e833bc2a260373e';
-                
+
                 await supertest(app).get(`/note?_id=${noteId}`).expect(404);
             },100000000)
         })

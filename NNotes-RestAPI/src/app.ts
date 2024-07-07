@@ -8,10 +8,9 @@ const DB_URI = <string>process.env.DB_URI || "mongodb://mongodb:27017/";
 
 const app = createServer()
 
-
-// console.log('Connecting to Database');
-// console.log('PORT:', PORT);
-// console.log('DB_URI:', DB_URI);
+console.log('Connecting to Database');
+console.log('PORT:', PORT);
+console.log('DB_URI:', DB_URI);
 
 db().then(()=> console.log('Connected to Database'));
 app.listen(Number(PORT), '0.0.0.0', async () => {
