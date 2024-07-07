@@ -45,7 +45,5 @@ jobs:
           alias kubectl="microk8s.kubectl"
       - name: Check kubectl version
         run: |
-          export KUBECONFIG=/etc/kubernetes/admin.conf
-          kubectl version
-        
+          microk8s.kubectl version
         # ------ la parte de microk8s ------
