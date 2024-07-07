@@ -37,7 +37,7 @@ export async function updateNote(
     console.log('BODY: ', body);
     const notes = await noteService.update(body);
     if (notes) res.status(200).json(notes);
-    res.status(404).json('Note not found');
+    else res.status(404).json('Note not found');
   } catch (err) {
     next(err);
   }
@@ -52,7 +52,7 @@ export async function deleteNote(
     const _id = req.query._id as string
     const notes = await noteService.deleteNote(_id);
     if (notes.status) res.status(404).json(notes.message);
-    res.status(200).json(notes.message);
+    else res.status(200).json(notes.message);
   } catch (err) {
     next(err);
   }
@@ -67,7 +67,7 @@ export async function getNoteById(
     const _id = req.query._id as string
     const notes = await noteService.getNoteById(_id);
     if (notes.status === 404) res.status(404).json(notes.message);
-    res.status(200).json(notes.message);
+    else res.status(200).json(notes.message);
   } catch (err) {
     next(err);
   }
