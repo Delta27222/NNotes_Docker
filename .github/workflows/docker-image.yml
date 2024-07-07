@@ -142,9 +142,11 @@ jobs:
         env:
           NEW_VERSION: ${{ steps.version.outputs.version }}
         run: |
+          docker build -t delta27222/nnotes_frontend:$NEW_VERSION ./NNotes-RestAPI/
           docker build -t delta27222/nnotes_backend:latest ./NNotes-RestAPI/
       - name: Push Docker Image
         env:
           NEW_VERSION: ${{ steps.version.outputs.version }}
         run: |
+          docker push delta27222/nnotes_backend:$NEW_VERSION
           docker push delta27222/nnotes_backend:latest`
