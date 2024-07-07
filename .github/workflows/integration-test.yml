@@ -2,11 +2,13 @@ name: Integration Test CI
 run-name: Integration Test CI - Microk8s
 
 # Solo se ejecuta desde el workflow de Docker Image CI
-on:
-  workflow_run:
-    workflows: ["Docker Image CI"]
-    types:
-      - completed
+# on:
+#   workflow_run:
+#     workflows: ["Docker Image CI"]
+#     types:
+#       - completed
+
+on: workflow_dispatch
 
 jobs:
   on-success:
