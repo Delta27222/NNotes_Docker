@@ -41,7 +41,7 @@ jobs:
       - name: Create alias
         run: |
           alias kubectl="microk8s.kubectl"
-        name: Check kubectl version
+      - name: Check kubectl version
         run: |
           sudo kubectl version
         
