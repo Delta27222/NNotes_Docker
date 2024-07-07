@@ -46,8 +46,12 @@ jobs:
           echo "🚀 Server is running on port $PORT"
       - name: Wait
         run: sleep 12
-
-      # Hasta aqui llega el test del frontend
+      - name: Run Frontend Tests
+        run: |
+          cd ${{ github.workspace }}/NNotes
+          npm run test
+          ss -ntlp
+          tail -n 10 nohup.out
       - name: Git Semantic Version
         uses: PaulHatch/semantic-version@v4.0.3
         with:
