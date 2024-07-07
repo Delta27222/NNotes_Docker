@@ -55,21 +55,18 @@ jobs:
           minor_pattern: "feat:"
           format: "${major}.${minor}.${increment}"
         id: version
-
       - name: Docker Login
         env:
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-
       - name: Build Docker Image
         env:
           NEW_VERSION: ${{ steps.version.outputs.version }}
         run: |
           docker build -t delta27222/nnotes_frontend:$NEW_VERSION ./NNotes/
           docker build -t delta27222/nnotes_frontend:latest ./NNotes/
-      
       - name: Push Docker Image
         env:
           NEW_VERSION: ${{ steps.version.outputs.version }}
@@ -121,10 +118,33 @@ jobs:
       #     npm run test
       #     ss -ntlp
       #     tail -n 10 nohup.out
-
-
       # - name: Stop Server
       #   # Deberia ser sudo fuser -k $PORT/tcp
       #   run: |
       #     sudo fuser -k 3001/tcp
       #     echo "🛑 Server has been stopped."
+
+      # Hasta aqui llega el test del frontend
+      - name: Git Semantic Version
+        uses: PaulHatch/semantic-version@v4.0.3
+        with:
+          major_pattern: "major:"
+          minor_pattern: "feat:"
+          format: "${major}.${minor}.${increment}"
+        id: version
+      - name: Docker Login
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - name: Build Docker Image
+        env:
+          NEW_VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          docker build -t delta27222/nnotes_backend:latest ./NNotes-RestAPI/
+      - name: Push Docker Image
+        env:
+          NEW_VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          docker push delta27222/nnotes_backend:latest`
