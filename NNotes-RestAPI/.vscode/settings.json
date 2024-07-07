@@ -4,5 +4,8 @@
         "activityBar.background": "#620019",
         "titleBar.activeBackground": "#890123",
         "titleBar.activeForeground": "#FFFBFC"
-    }
+    },
+    "conventionalCommits.scopes": [
+        "api"
+    ]
 }
