@@ -43,8 +43,33 @@ jobs:
       - name: Check kubectl version
         run: |
           sudo microk8s.kubectl version
-      - name: Pull docker images from Docker Hub
-        run: |
-          sudo microk8s.kubectl create deployment nnotes-frontend --image=delta27222/nnotes_frontend:latest
 
         # ------ la parte de microk8s ------
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Check repo
+        run: |
+          echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+          echo "🖥️ The workflow is now ready to test your code on the runner."
+          ls ${{ github.workspace }}
+      - name: apply mongo
+        run: |
+          sudo microk8s.kubectl apply -f ${{ github.workspace }}/kubernetes/kmongo.yaml
+      - name: Wait
+        run: sleep 6
+      - name: apply backend
+        run: |
+          sudo microk8s.kubectl apply -f ${{ github.workspace }}/kubernetes/backend.yaml
+      - name: wait
+        run: sleep 6
+      - name: apply frontend
+        run: |
+          sudo microk8s.kubectl apply -f ${{ github.workspace }}/kubernetes/frontend.yaml
+      - name: wait
+        run: sleep 20
+      - name: Check All
+        run: |
+          sudo microk8s.kubectl get all
+      - name: Finish
+        run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
