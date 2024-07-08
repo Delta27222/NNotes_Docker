@@ -30,6 +30,7 @@ kind: Service
 metadata:
   name: backend-service
 spec:
+  clusterIP: 10.152.183.100
   selector:
     app: backend
   ports:

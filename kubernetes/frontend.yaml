@@ -21,6 +21,7 @@ spec:
         env:
         - name: NEXT_PUBLIC_BASE_URL
           value: "http://backend-service:3001"
+          # No sirven las variables de entorno asi en nextjs
 
 ---
 apiVersion: v1
