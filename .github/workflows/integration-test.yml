@@ -2,19 +2,19 @@ name: Integration Test CI
 run-name: Integration Test CI - Microk8s
 
 # Solo se ejecuta desde el workflow de Docker Image CI
-# on:
-#   workflow_run:
-#     workflows: ["Docker Image CI"]
-#     types:
-#       - completed
+on:
+  workflow_run:
+    workflows: ["Docker Image CI"]
+    types:
+      - completed
 
-on: workflow_dispatch
+# on: workflow_dispatch
 
 jobs:
   on-success:
     runs-on: ubuntu-latest
     # Creo que el if no es necesario, ya que si el test del workflow anterior falla, este no se ejecuta
-    # if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -71,5 +71,8 @@ jobs:
       - name: Check All
         run: |
           sudo microk8s.kubectl get all
+      - name: Integration Test
+        run: |
+          echo "🧐 No supimos como hacer los tests de integración"
       - name: Finish
         run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
