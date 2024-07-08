@@ -4,7 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-ENV NEXT_PUBLIC_BASE_URL=http://localhost:3001
+ENV NEXT_PUBLIC_BASE_URL=http://backend-service:3001
 RUN npm run build
 
 FROM node:18-alpine AS runtime
