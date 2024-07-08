@@ -4,6 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
+ENV NEXT_PUBLIC_BASE_URL=http://localhost:3001
 RUN npm run build
 
 FROM node:18-alpine AS runtime
@@ -16,7 +17,6 @@ COPY --from=build /app/public ./public
 
 EXPOSE 3000
 
-ENV NEXT_PUBLIC_BASE_URL=http://localhost:3001
 
 USER node
 CMD ["npm", "start"]
