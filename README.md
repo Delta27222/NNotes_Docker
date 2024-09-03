@@ -26,6 +26,7 @@ Una vez que hayas descargado la imagen, puedes ejecutar un contenedor usando el 
 ```bash
     docker container run -dp 3000:3000 delta27222/nnotes_frontend:<image_version>
 ```
+
 #### 3) Acceder a la Aplicación
 
 Después de ejecutar el contenedor, abre tu navegador web y dirígete a la siguiente URL para acceder a la aplicación:
@@ -35,7 +36,24 @@ Después de ejecutar el contenedor, abre tu navegador web y dirígete a la sigui
 ```
 -------
 
-## Back Image [Link](https://hub.docker.com/r/delta27222/nnotes_frontend)
-### 1) PRIMER PASO
-### 2) SEGUNDO PASO
-### 3) TERCER PASO
+## Back Image [Link](https://hub.docker.com/r/delta27222/nnotes_backend)
+
+### 1) Descargar la Imagen
+
+Para descargar la imagen desde Docker Hub, usa el siguiente comando. Reemplaza `<image_version>` con la versión específica de la imagen que deseas descargar.
+
+```bash
+    docker pull delta27222/nnotes_backend:<image_version>
+```
+
+### 2) Ejecutar el Contenedor
+
+```bash
+    docker container run -dp <port>:<port> delta27222/nnotes_backend:<image_version>
+```
+
+## Github Actions
+
+### Workflow
+
+![NNotes_GActions_Workflow](https://github.com/user-attachments/assets/6e901357-7b8b-46f4-ac95-a1b82ea0479a)
