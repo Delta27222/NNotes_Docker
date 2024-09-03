@@ -56,4 +56,4 @@ Para descargar la imagen desde Docker Hub, usa el siguiente comando. Reemplaza `
 
 ### Workflow
 
-![NNotes_GActions_Workflow](https://github.com/user-attachments/assets/6e901357-7b8b-46f4-ac95-a1b82ea0479a)
+<img src="https://github.com/user-attachments/assets/6e901357-7b8b-46f4-ac95-a1b82ea0479a" width="600" alt="Github Actions Workflow Diagram">
